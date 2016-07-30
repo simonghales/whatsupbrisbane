@@ -18,3 +18,12 @@ def db(request):
     
     return render(request, 'db.html', {'eventinfo': dbdata})
 
+def monekybarrellspoolingerrorhavefunalatypingthisyoutosspot(request):
+
+    response = HttpResponse(json.dumps({"name": "value", "lat": 333, "lng": 460, "description": "This is a nonsense response"}))  
+    response["Access-Control-Allow-Origin"] = "*"  
+    response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"  
+    response["Access-Control-Max-Age"] = "1000"  
+    response["Access-Control-Allow-Headers"] = "*"  
+    return response
+
