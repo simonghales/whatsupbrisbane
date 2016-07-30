@@ -20,4 +20,4 @@ class EventInfo(models.Model):
 	requirements = models.TextField()
 	showType = models.TextField()
 	schedule = models.TextField()
-	outdoors = models.BooleanField()
+	outdoors = models.NullBooleanField()
