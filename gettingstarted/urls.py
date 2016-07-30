@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^$', main.views.index, name='index'),
     url(r'^db', main.views.db, name='db'),
     url(r'^test', main.views.test, name='test'),
+    url(r'^events', main.views.events, name='events'),
+    url(r'^allEvents', main.views.allEvents, name='allEvents'),
     url(r'^admin/', include(admin.site.urls)),
 ]
