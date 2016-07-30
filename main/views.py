@@ -18,7 +18,7 @@ def db(request):
     
     return render(request, 'db.html', {'eventinfo': dbdata})
 
-def monekybarrellspoolingerrorhavefunalatypingthisyoutosspot(request):
+def test(request):
 
     response = HttpResponse(json.dumps({"name": "value", "lat": 333, "lng": 460, "description": "This is a nonsense response"}))  
     response["Access-Control-Allow-Origin"] = "*"  
