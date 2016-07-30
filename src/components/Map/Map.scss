@@ -1,4 +1,16 @@
-.activeRoute {
-  font-weight: bold;
-  text-decoration: underline;
+.root {
+  width: 100%;
+  height: 100%;
+
+  img {
+    max-width: none;
+  }
+
+  label {
+    width: auto;
+    display: inline;
+  }
+
+  img, object, embed { max-width: none; }
+
 }
