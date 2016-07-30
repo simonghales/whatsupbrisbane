@@ -1,3 +1,14 @@
 .btn {
   @extend %shared-btn-reset;
 }
+
+.btn-submit {
+  @extend .btn;
+  @include border-radius(3px);
+  background-color: #2FC4FF;
+  color: #FFFFFF;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 20px 10px;
+  width: 100%;
+}

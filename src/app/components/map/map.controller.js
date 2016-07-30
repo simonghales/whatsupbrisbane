@@ -1,38 +1,51 @@
 
+var    fontawesome = require('fontawesome-markers')
+
+console.log("here's font awesome", fontawesome);
+
 const _uiGmapGoogleMapApi = new WeakMap();
 
 export default class MapController {
-    constructor ($scope, $timeout, uiGmapGoogleMapApi) {
+    constructor (uiGmapGoogleMapApi) {
         'ngInject';
-
-        $scope.map = {
-            center: {
-                latitude: 51.219053,
-                longitude: 4.404418
-            },
-            zoom: 14
-        };
-        $scope.options = {
-            scrollwheel: false
-        };
 
         _uiGmapGoogleMapApi.set(this, uiGmapGoogleMapApi);
 
-        this.map = {
-            center: {
-                latitude: 0,
-                longitude: 0
+        this.marker = {
+            coords: {
+                latitude: -27.482534,
+                longitude: 152.979246
             },
-            zoom: 8
+            options: {
+                icon: {
+                    path: fontawesome.MALE,
+                    scale: 0.75,
+                    strokeWeight: 1,
+                    strokeColor: 'black',
+                    strokeOpacity: 1,
+                    fillColor: '#fd1164',
+                    fillOpacity: 1,
+                }
+            },
+            events: {},
+            id: 'boop'
+        };
+
+        this.circle = {
+            center: {
+                latitude: -27.482534,
+                longitude: 152.979246
+            },
+            radius: 1000,
+            fill: 'red',
+            stroke: ''
         };
 
         this.states = {
             mapLoaded: false
         };
 
-        $timeout(() => {
-            this.activate();
-        }, 200);
+        this.activate();
 
     }
 
@@ -49,8 +62,8 @@ export default class MapController {
             this.googlemap = {};
             this.map = {
                 center: {
-                    latitude: -27.496761,
-                    longitude: 153.019534
+                    latitude: -27.484675,
+                    longitude: 152.986078
                 },
                 zoom: 14,
                 pan: 1,
@@ -75,7 +88,6 @@ export default class MapController {
                     'style': 'SMALL'
                 }
             };
-            console.log("thingy is ready", this);
 
         });
         

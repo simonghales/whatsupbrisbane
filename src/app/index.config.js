@@ -10,10 +10,10 @@ export function config ($logProvider, toastrConfig, uiGmapGoogleMapApiProvider) 
   toastrConfig.preventDuplicates = true;
   toastrConfig.progressBar = true;
 
-  // uiGmapGoogleMapApiProvider.configure({
-  //   key: 'AIzaSyAgLTVCMB8hXpBR4yTo7MgGkifmnggiJA0',
-  //   v: '3', //defaults to latest 3.X anyhow
-  //   libraries: ''
-  // });
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyAgLTVCMB8hXpBR4yTo7MgGkifmnggiJA0',
+    v: '3', //defaults to latest 3.X anyhow
+    libraries: ''
+  });
 
 }

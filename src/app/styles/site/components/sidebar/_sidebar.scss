@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: #FFFFFF;
+  background-color: #FDFEFE;
   height: 100%;
 }
 
@@ -35,6 +35,27 @@
 
       &:first-of-type {
         margin-top: 0;
+      }
+
+      h3 {
+        color: #43597C;
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      input {
+        background-color: #FFFFFF;
+        border: 1px solid #E1E9F0;
+        font-size: 17px;
+        padding: 10px;
+        width: 100%;
+
+        &:focus {
+          border-color: #000000;
+          outline: none;
+        }
+
       }
 
     }

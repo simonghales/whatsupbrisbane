@@ -7,18 +7,28 @@
 .map {
   @extend %fullWidthHeight;
   position: relative;
+
+  img {
+    max-height: none !important;
+    max-width: none !important;
+  }
+
+  label {
+    width: auto !important;
+    display: inline !important;
+  }
+
+  img, object, embed { max-width: none !important; }
+
 }
 
   .angular-google-map {
-    //position: absolute;
-    //top: 0;
-    //left: 0;
-    //right: 0;
-    //bottom: 0;
   }
 
     .angular-google-map-container {
-      //@extend %fullWidthHeight;
-      //width: 600px;
-      height: 600px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }

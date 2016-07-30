@@ -2,6 +2,19 @@
     <ui-gmap-google-map
             ng-if="mapVM.states.mapLoaded"
             events="mapVM.map.events"
-            options="mapVM.map.mapOptions" center="mapVM.map.center" zoom="mapVM.map.zoom" draggable="true" control="mapVM.googlemap"></ui-gmap-google-map>
-    <!--<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>-->
+            options="mapVM.map.mapOptions"
+            center="mapVM.map.center"
+            zoom="mapVM.map.zoom"
+            draggable="true"
+            control="mapVM.googlemap">
+        <ui-gmap-circle center="mapVM.circle.center"
+                        radius="mapVM.circle.radius"
+                        fill="mapVM.circle.fill">
+        </ui-gmap-circle>
+        <ui-gmap-marker coords="mapVM.marker.coords"
+                        options="mapVM.marker.options"
+                        events="mapVM.marker.events"
+                        idkey="mapVM.marker.id">
+        </ui-gmap-marker>
+    </ui-gmap-google-map>
 </div>
