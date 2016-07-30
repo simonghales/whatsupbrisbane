@@ -1,0 +1,19 @@
+
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.sidebarContainer {
+  float: left;
+  width: 340px;
+  height: 100%;
+}
+
+.mainContainer {
+  overflow: hidden;
+  height: 100%;
+}
