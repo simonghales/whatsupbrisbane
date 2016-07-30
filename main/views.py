@@ -16,5 +16,5 @@ def db(request):
 
     dbData = EventInfo.objects.all()
     
-    return render(request, 'db.html', {'greetings': dbdata})
+    return render(request, 'db.html', {'eventinfo': dbdata})
 
