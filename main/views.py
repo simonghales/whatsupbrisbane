@@ -57,7 +57,7 @@ def events(request):
     for event in allEvents:
         event_location = findOrCreateLatLong(event.venueAddress)
         
-        if(event.timeStart => timeStart and
+        if(event.timeStart >= timeStart and
            event.timeEnd <= timeEnd and
            haversine(event_location, current_location) < radius):
 
