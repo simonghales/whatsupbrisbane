@@ -1,4 +1,10 @@
-export function config ($logProvider, toastrConfig, uiGmapGoogleMapApiProvider) {
+
+import { API_BASE_URL, GOOGLEMAPS_KEY } from './constants'
+
+export function config ($logProvider,
+                        RestangularProvider,
+                        toastrConfig,
+                        uiGmapGoogleMapApiProvider) {
   'ngInject';
   // Enable log
   $logProvider.debugEnabled(true);
@@ -10,10 +16,13 @@ export function config ($logProvider, toastrConfig, uiGmapGoogleMapApiProvider) 
   toastrConfig.preventDuplicates = true;
   toastrConfig.progressBar = true;
 
+  RestangularProvider
+      .setBaseUrl(API_BASE_URL);
+
   uiGmapGoogleMapApiProvider.configure({
-    key: 'AIzaSyAgLTVCMB8hXpBR4yTo7MgGkifmnggiJA0',
-    v: '3', //defaults to latest 3.X anyhow
-    libraries: ''
+    key: GOOGLEMAPS_KEY,
+    v: '3',
+    libraries: 'places'
   });
 
 }

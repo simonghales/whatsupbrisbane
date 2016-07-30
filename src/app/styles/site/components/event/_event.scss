@@ -1,0 +1,45 @@
+.event {
+  @extend .clearfix;
+  cursor: pointer;
+  padding: 15px 30px;
+
+  &:hover {
+    background-color: #fafafa;
+  }
+
+}
+
+  $thumb-size: 60px;
+  .event__thumb {
+    @extend %thumbnail;
+    background-color: #e0e0e0;
+    width: $thumb-size;
+    height: $thumb-size;
+    float: left;
+    margin-right: 15px;
+  }
+
+  .event__info {
+    overflow: hidden;
+  }
+
+    .event__title {
+      color: #000000;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .event__details {
+      font-size: 14px;
+      margin-top: 8px;
+
+      > li {
+        margin-top: 5px;
+
+        &:first-of-type {
+          margin-top: 0;
+        }
+
+      }
+
+    }

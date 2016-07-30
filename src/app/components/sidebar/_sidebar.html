@@ -1,37 +1,18 @@
 <div class="sidebar">
-    <div class="sidebar__intro">
-        <h1 class="sidebar__title">What's Up Brisbane</h1>
-        <p class="sidebar__desc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis cupiditate delectus deserunt.
-        </p>
-    </div>
-    <form class="sidebar__form">
-        <div class="sidebar__input">
-            <label>
-                <h3>Starting Location</h3>
-                <input type="text" />
-            </label>
+    <header class="sidebar__header">
+        <div class="nav__btn nav__btn--left"
+             ng-show="sidebarVM.states.currentTab === sidebarVM.tabs.results"
+             ng-click="sidebarVM.navigatePrevious()">
+            <div class="icon icon-left-big"></div>
+            <div class="text">Return</div>
         </div>
-        <div class="sidebar__input">
-            <label>
-                <h3>Accepted Distance Radius</h3>
-                <input type="text" />
-            </label>
+        <div class="nav__btn nav__btn--right"
+             ng-show=""
+             ng-click="sidebarVM.navigateForward()">
+            <div class="text">Return to results</div>
+            <div class="icon icon-right-big"></div>
         </div>
-        <div class="sidebar__input">
-            <label>
-                <h3>Starting Time</h3>
-                <input type="text" />
-            </label>
-        </div>
-        <div class="sidebar__input">
-            <label>
-                <h3>End Time</h3>
-                <input type="text" />
-            </label>
-        </div>
-        <div class="sidebar__submit">
-            <button class="btn-submit">Find Events</button>
-        </div>
-    </form>
+    </header>
+    <sidebar-intro ng-if="sidebarVM.states.currentTab === sidebarVM.tabs.intro" />
+    <sidebar-results ng-if="sidebarVM.states.currentTab === sidebarVM.tabs.results" />
 </div>

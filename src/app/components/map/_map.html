@@ -1,20 +1,24 @@
 <div class="map">
     <ui-gmap-google-map
             ng-if="mapVM.states.mapLoaded"
-            events="mapVM.map.events"
-            options="mapVM.map.mapOptions"
-            center="mapVM.map.center"
-            zoom="mapVM.map.zoom"
+            events="mapVM.state.map.events"
+            options="mapVM.state.map.mapOptions"
+            center="mapVM.state.map.center"
+            zoom="mapVM.state.map.zoom"
             draggable="true"
-            control="mapVM.googlemap">
-        <ui-gmap-circle center="mapVM.circle.center"
-                        radius="mapVM.circle.radius"
-                        fill="mapVM.circle.fill">
+            control="mapVM.state.googlemap">
+        <ui-gmap-circle center="mapVM.state.radiusCircle.center"
+                        radius="mapVM.state.radiusCircle.radius"
+                        fill="mapVM.state.radiusCircle.fill">
         </ui-gmap-circle>
-        <ui-gmap-marker coords="mapVM.marker.coords"
-                        options="mapVM.marker.options"
-                        events="mapVM.marker.events"
-                        idkey="mapVM.marker.id">
+        <ui-gmap-marker coords="mapVM.state.originMarker.coords"
+                        options="mapVM.state.originMarker.options"
+                        events="mapVM.state.originMarker.events"
+                        idkey="mapVM.state.originMarker.id">
         </ui-gmap-marker>
+        <div ng-if="mapVM.data.events">
+            <ui-gmap-markers models="mapVM.data.events" coords="'self'" icon="'icon'">
+            </ui-gmap-markers>
+        </div>
     </ui-gmap-google-map>
 </div>

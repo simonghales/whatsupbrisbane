@@ -1,0 +1,65 @@
+<div class="sidebar__content">
+    <div class="sidebar__intro">
+        <h1 class="sidebar__title">What's Up Brisbane</h1>
+        <p class="sidebar__desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis cupiditate delectus deserunt.
+        </p>
+    </div>
+    <form class="sidebar__form">
+        <div class="sidebar__input">
+            <label>
+                <h3>Starting Location</h3>
+                <input ng-model="sidebarVM.models.location"
+                       ng-autocomplete
+                       details="sidebarVM.data.location.details"
+                       type="text" />
+            </label>
+        </div>
+        <div class="sidebar__input">
+            <label>
+                <h3>Accepted Distance Radius <span>(metres)</span></h3>
+                <input  ng-model="sidebarVM.models.radius"
+                        ng-change="sidebarVM.updateRadius()"
+                        type="text" />
+            </label>
+        </div>
+        <div class="sidebar__input">
+            <label>
+                <h3>Starting Time</h3>
+                <input
+                        ng-model="sidebarVM.models.startDate"
+                        moment-picker="sidebarVM.models.startDate"
+                        min-view="month"
+                        max-view="day"
+                        start-view="month"
+                        today="true"
+                        autoclose="true"
+                        disable="sidebarVM.states.startDateDisabled"
+                        readonly
+                        type="text"
+                        placeholder="Enter a starting date"/>
+            </label>
+        </div>
+        <div class="sidebar__input">
+            <label>
+                <h3>End Time</h3>
+                <input
+                        ng-model="sidebarVM.models.endDate"
+                        moment-picker="sidebarVM.models.endDate"
+                        min-view="month"
+                        max-view="day"
+                        start-view="month"
+                        today="true"
+                        autoclose="true"
+                        disable="sidebarVM.states.endDateDisabled"
+                        readonly
+                        type="text"
+                        placeholder="Enter an ending date"/>
+            </label>
+        </div>
+        <div class="sidebar__submit">
+            <button class="btn-submit"
+                    ng-click="sidebarVM.findEvents()">Find Events</button>
+        </div>
+    </form>
+</div>
