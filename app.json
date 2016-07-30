@@ -1,8 +1,8 @@
 {
-  "name": "Python on Heroku example",
-  "description": "A barebones Python app, which can easily be deployed to Heroku.",
+  "name": "The main application for the 'What's up Brisbane' API",
+  "description": "A Heroku deployed python 3.4.3 REST API to provide local Brisbane event data.",
   "image": "heroku/python",
-  "repository": "https://github.com/heroku/python-getting-started",
+  "repository": "https://github.com/heroku/whatsupbrisbane",
   "keywords": ["python", "django" ],
   "addons": [ "heroku-postgresql" ]
 }
