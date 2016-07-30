@@ -18,7 +18,7 @@ def db(request):
 
     dbData = EventInfo.objects.all()
     
-    return render(request, 'db.html', {'eventinfo': dbdata})
+    return render(request, 'db.html', {'eventinfo': dbData})
 
 def test(request):
 
