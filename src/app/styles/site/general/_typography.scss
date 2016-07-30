@@ -1,0 +1,26 @@
+
+%font--default {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+%font--heading {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @extend %font--heading;
+}
+
+body {
+  @extend %font--default;
+  color: #{map_get($colours, default)};
+  font-size: 16px;
+}
+
+strong {
+  font-weight: 700;
+}
+
+a[ng-click] {
+  cursor: pointer;
+}

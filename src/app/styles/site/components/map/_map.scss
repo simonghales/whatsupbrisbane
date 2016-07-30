@@ -1,0 +1,24 @@
+
+%fullWidthHeight {
+  height: 100%;
+  width: 100%;
+}
+
+.map {
+  @extend %fullWidthHeight;
+  position: relative;
+}
+
+  .angular-google-map {
+    //position: absolute;
+    //top: 0;
+    //left: 0;
+    //right: 0;
+    //bottom: 0;
+  }
+
+    .angular-google-map-container {
+      //@extend %fullWidthHeight;
+      //width: 600px;
+      height: 600px;
+    }

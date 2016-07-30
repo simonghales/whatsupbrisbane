@@ -1,0 +1,70 @@
+
+.input {
+  @extend %shared-input-reset;
+}
+
+.input--search {
+  @include box-shadow-multiple(inset 0 0 15px rgba(0,0,0,0.04), inset 0 10px 15px rgba(0,0,0,0.02));
+  @include border-radius(3px);
+  background-color: #eaeaea;
+  color: #555555;
+  padding: 12px 12px 12px 40px;
+  width: 100%;
+  font-size: .95em;
+
+  &:focus {
+    background-color: #e4e4e4;
+    border-color: #e0e0e0;
+  }
+
+}
+
+.input--bigTitle {
+  width: 100%;
+  color: #{map_get($colours, secondary)};
+  font-size: 1.6em;
+
+  &:focus {
+
+    @include placeholder {
+      color: transparentize(map_get($colours, secondary), 0.25);
+    }
+
+  }
+
+  @include placeholder {
+    color: transparentize(map_get($colours, secondary), 0.5);
+  }
+
+}
+
+.input--uri {
+  @extend %shared-block;
+  font-size: 16px;
+  color: #b0b0b0;
+
+  @include placeholder {
+    color: #b4b4b4;
+  }
+
+  &:focus {
+    border-color: #555555;
+
+    @include placeholder {
+      color: #999999;
+    }
+
+  }
+
+}
+
+.input--plain {
+  border-bottom: 1px solid #555555;
+  padding: 4px 3px;
+  font-size: 22px;
+
+  @include placeholder {
+    color: #b0b0b0;
+  }
+
+}

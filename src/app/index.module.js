@@ -1,22 +1,36 @@
-/* global malarkey:false, moment:false */
 
+import { register } from './vendors/register.js';
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
-import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
-import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
-import { NavbarDirective } from '../app/components/navbar/navbar.directive';
-import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
+import SidebarController from './components/sidebar/sidebar.controller';
+import SidebarDirective from './components/sidebar/sidebar.directive';
+import MapController from './components/map/map.controller';
+import MapDirective from './components/map/map.directive';
 
-angular.module('whatsupbrisbane', ['ngAnimate', 'ngCookies', 'ngSanitize', 'restangular', 'ui.router', 'toastr'])
-  .constant('malarkey', malarkey)
-  .constant('moment', moment)
+angular.module('whatsupbrisbane',
+    [
+
+        'uiGmapgoogle-maps',
+        'ngMap',
+
+        'ngAnimate',
+        'ngCookies',
+        'ngSanitize',
+        'restangular',
+        'ui.router',
+        'toastr']
+    )
   .config(config)
   .config(routerConfig)
   .run(runBlock)
-  .service('githubContributor', GithubContributorService)
-  .service('webDevTec', WebDevTecService)
-  .controller('MainController', MainController)
-  .directive('acmeNavbar', NavbarDirective)
-  .directive('acmeMalarkey', MalarkeyDirective);
+  .controller('MainController', MainController);
+
+register('whatsupbrisbane')
+    .controller('SidebarController', SidebarController)
+    .directive('sidebar', SidebarDirective);
+
+register('whatsupbrisbane')
+    .controller('MapController', MapController)
+    .directive('mainMap', MapDirective);
