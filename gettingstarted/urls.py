@@ -12,6 +12,6 @@ import main.views
 urlpatterns = [
     url(r'^$', main.views.index, name='index'),
     url(r'^db', main.views.db, name='db'),
-    url(r'^test', main.views.test, name="test'),
+    url(r'^test', main.views.test, name='test'),
     url(r'^admin/', include(admin.site.urls)),
 ]
