@@ -2,13 +2,13 @@
 #do NOT let it run heaps
 #run some test cases before unleashing it to populate the whole RSS feed
 import googlemaps
-from urllib import parse
+from urllib.parse import urlencode as encode 
 from .models import AddressLocation
 
 def addressToLatLong(address):
 
         gmaps = googlemaps.Client(key="AIzaSyA3U5sV5yEg7KY_Inl1iSaxVdFTXLb7aAk")
-        geocode = gmaps.geocode(parse(address))
+        geocode = gmaps.geocode(encode(address))
         latitude = geocode[0]['geometry']['location']['lat']
         longitude = geocode[0]['geometry']['location']['lng']
 
