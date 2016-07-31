@@ -39,8 +39,8 @@ def events(request):
 
     body = request.GET
 
-    lat = body['lat']
-    lng = body['lng']
+    lat = float(body['lat'])
+    lng = float(body['lng'])
     current_location = (lat,lng)
     
     radius = body['radius']

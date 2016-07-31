@@ -9,20 +9,19 @@ def addressToLatLong(address):
         gmaps = googlemaps.Client(key="AIzaSyA3U5sV5yEg7KY_Inl1iSaxVdFTXLb7aAk")
         geocode = gmaps.geocode(address)
 
-        latitude = None
-        longitude = None
-
         if(len(geocode) != 0):
                 latitude = geocode[0]['geometry']['location']['lat']
                 longitude = geocode[0]['geometry']['location']['lng']
 
-        return latitude, longitude
+                return float(latitude), float(longitude)
+        else:
+                return None,None
 
 def findOrCreateLatLong(addressInput):
                 
         try:
             address = AddressLocation.objects.get(address=addressInput)
-            return (address.latitude,address.longitude)
+            return (float(address.latitude),float(address.longitude))
         except AddressLocation.DoesNotExist:
             # if it doesn't exist, convert address to lat and lng and add it
             lat,lng = addressToLatLong(addressInput)
