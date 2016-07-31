@@ -9,6 +9,9 @@ class Command(BaseCommand):
 	help = 'Retrieves events from the BCC RSS feeds'
 	
 	def handle(self, *args, **options):
+
+                EventInfo.objects.all().delete()
+                
 		# access RSS feeds
 		allData = readRSSFeeds()
 
