@@ -1,6 +1,6 @@
 
 import { STARTING_MARKER } from '../../constants/markers'
-import { createEventMarker } from '../../utilities/events'
+import { DEFAULT_LAT, DEFAULT_LONG } from '../../constants/defaults'
 
 const _$log = new WeakMap();
 const _$scope = new WeakMap();
@@ -19,7 +19,9 @@ export default class MapController {
         _uiGmapGoogleMapApi.set(this, uiGmapGoogleMapApi);
 
         this.config = {
-
+            actionEvents: {
+                click: this._eventMarkerClick
+            }
         };
 
         this.data = {
@@ -40,11 +42,12 @@ export default class MapController {
         };
 
         this.state = {
+            eventMarkers: null,
             googlemap: {},
             map: {
                 center: {
-                    latitude: -27.482534,
-                    longitude: 152.979246
+                    latitude: DEFAULT_LAT,
+                    longitude: DEFAULT_LONG
                 },
                 zoom: 14,
                 pan: 1,
@@ -53,8 +56,8 @@ export default class MapController {
             },
             originMarker: {
                 coords: {
-                    latitude: -27.482534,
-                    longitude: 152.979246
+                    latitude: DEFAULT_LAT,
+                    longitude: DEFAULT_LONG
                 },
                 options: {
                     icon: STARTING_MARKER
@@ -64,8 +67,8 @@ export default class MapController {
             },
             radiusCircle: {
                 center: {
-                    latitude: -27.482534,
-                    longitude: 152.979246
+                    latitude: DEFAULT_LAT,
+                    longitude: DEFAULT_LONG
                 },
                 radius: 500,
                 fill: 'red',
@@ -92,7 +95,6 @@ export default class MapController {
 
         _uiGmapGoogleMapApi.get(this).then((maps) => {
             this.states.mapLoaded = true;
-            this._loadEvents();
         });
         
     }
@@ -102,27 +104,13 @@ export default class MapController {
         google.maps.event.trigger(maps,'resize');
     }
 
-    _loadEvents() {
+    _eventMarkerClick(marker, eventName) {
+        console.log("event marker clicked...", marker, eventName);
+        // OPEN A MODAL WITH THE EVENT!!!
+    }
 
-        _EventsService.get(this).getEvents()
-            .then((data) => {
-                _$log.get(this).debug("events result", data);
-
-                let events = [];
-
-                for(let i = 0, len = data.length; i < len; i++) {
-                    let event = createEventMarker(i);
-                    events.push(event);
-                }
-
-                this.data.events = events;
-
-                console.log("events", events);
-
-            }, (error) => {
-                _$log.get(this).warn("failed to retrieve events", error);
-            });
-
+    _updateEventMarkers(markers) {
+        this.state.eventMarkers = markers;
     }
 
     _updateOrigin(origin) {
@@ -136,6 +124,18 @@ export default class MapController {
     }
 
     _watchStates() {
+
+        // Watch Event Markers
+        _$scope.get(this).$watch(() => {
+            return _MapsService.get(this).getEventMarkers();
+        }, (newVal, oldVal) => {
+
+            console.log("new event markers", newVal);
+            if(newVal) {
+                this._updateEventMarkers(newVal);
+            }
+
+        });
 
         // Watch Origin
         _$scope.get(this).$watch(() => {

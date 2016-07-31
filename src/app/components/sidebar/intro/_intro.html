@@ -2,7 +2,7 @@
     <div class="sidebar__intro">
         <h1 class="sidebar__title">What's Up Brisbane</h1>
         <p class="sidebar__desc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis cupiditate delectus deserunt.
+            Check out local events happening in Brisbane
         </p>
     </div>
     <form class="sidebar__form">
@@ -22,7 +22,7 @@
             </div>
             <div class="sidebar__input">
                 <label>
-                    <h3>Accepted Distance Radius <span>(kilometres)</span></h3>
+                    <h3>Radius <span>(kilometres)</span></h3>
                     <rzslider
                             rz-slider-options="sidebarVM.config.slider.options"
                             rz-slider-model="sidebarVM.models.radius"></rzslider>
@@ -70,7 +70,13 @@
         </section>
         <div class="sidebar__submit">
             <button class="btn-submit"
-                    ng-click="sidebarVM.findEvents()">Find Events</button>
+                    ng-class="{
+                        'state--disabled': !sidebarVM.canFindEvents()
+                    }"
+                    ng-click="sidebarVM.findEvents()">
+                <span ng-hide="sidebarVM.states.fetchingEvents">Find Events</span>
+                <span ng-show="sidebarVM.states.fetchingEvents">Finding Events...</span>
+            </button>
         </div>
     </form>
 </div>

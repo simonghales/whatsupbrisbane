@@ -4,6 +4,7 @@
 
 .btn-submit {
   @extend .btn;
+  @include transition(all 350ms ease);
   //@include border-radius(3px);
   background-color: #2FC4FF;
   color: #FFFFFF;
@@ -11,4 +12,10 @@
   text-transform: uppercase;
   padding: 20px 10px;
   width: 100%;
+
+  &.state--disabled {
+    background-color: #d9e2ec;
+    cursor: default;
+  }
+
 }

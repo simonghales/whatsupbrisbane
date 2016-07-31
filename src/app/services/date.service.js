@@ -26,4 +26,10 @@ export default class DateService {
 
     }
 
+    getTimestamp(time) {
+
+        return _moment.get(this)(time).format();
+
+    }
+
 }

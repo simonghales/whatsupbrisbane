@@ -16,14 +16,34 @@ export default class EventsService {
         _$q.set(this, $q);
         _Restangular.set(this, Restangular);
 
+        this.state = {
+          events: null
+        };
+
     }
 
     // Actions
 
     getEvents() {
+        return this.state.events;
+    }
 
-        return _Restangular.get(this).all(GET_EVENTS).getList();
+    fetchEvents(lat, lng, radius, start, end) {
 
+        let params = {
+            lat,
+            lng,
+            radius,
+            start,
+            end
+        };
+
+        return _Restangular.get(this).all(GET_EVENTS).getList(params);
+
+    }
+
+    setEvents(events) {
+        this.state.events = events;
     }
 
 

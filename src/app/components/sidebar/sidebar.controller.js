@@ -1,20 +1,23 @@
 
 import { SIDEBAR_TAB_INTRO, SIDEBAR_TAB_RESULTS } from '../../constants/sidebar';
+import { createEventMarker } from '../../utilities/events'
 
 const _$log = new WeakMap();
 const _$scope = new WeakMap();
 const _DateService = new WeakMap();
+const _EventsService = new WeakMap();
 const _MapsService = new WeakMap();
 const _PlacesService = new WeakMap();
 const _uiGmapGoogleMapApi = new WeakMap();
 
 export default class SidebarController {
-    constructor ($log, $scope, DateService, MapsService, PlacesService, uiGmapGoogleMapApi) {
+    constructor ($log, $scope, DateService, EventsService, MapsService, PlacesService, uiGmapGoogleMapApi) {
         'ngInject';
 
         _$log.set(this, $log);
         _$scope.set(this, $scope);
         _DateService.set(this, DateService);
+        _EventsService.set(this, EventsService);
         _MapsService.set(this, MapsService);
         _PlacesService.set(this, PlacesService);
         _uiGmapGoogleMapApi.set(this, uiGmapGoogleMapApi);
@@ -23,16 +26,19 @@ export default class SidebarController {
           slider: {
               options: {
                   floor: 1,
-                  ceil: 20,
+                  ceil: 10,
                   onChange: this.updateRadius.bind(this)
               }
           }
         };
 
         this.data = {
-          location: {
-              details: null
-          }
+            events: [],
+            location: {
+                details: null
+            },
+            latitude: null,
+            longitude: null,
         };
 
         this.models = {
@@ -50,6 +56,7 @@ export default class SidebarController {
         this.states = {
             currentTab: SIDEBAR_TAB_INTRO,
             endDateDisabled: false,
+            fetchingEvents: false,
             startDateDisabled: false
         };
 
@@ -69,6 +76,8 @@ export default class SidebarController {
 
                 const latitude = newVal.geometry.location.lat();
                 const longitude = newVal.geometry.location.lng();
+                this.data.latitude = latitude;
+                this.data.longitude = longitude;
                 this.updateOrigin(latitude, longitude);
 
             }
@@ -76,13 +85,26 @@ export default class SidebarController {
 
         })
 
+        this._watchStates();
+
         this.updateRadius();
 
     }
 
+    canFindEvents() {
+        let valid = true;
+
+        if(!this.data.latitude || !this.data.longitude) valid = false;
+
+        return valid;
+    }
+
     findEvents() {
 
-        this.navigateForward();
+        if(this.states.fetchingEvents) return;
+        this.states.fetchingEvents = true;
+
+        this._loadEvents();
 
     }
 
@@ -105,6 +127,60 @@ export default class SidebarController {
         radius = parseInt(radius) * 1000; // convert from km to m
 
         _MapsService.get(this).setRadius(radius);
+    }
+
+    _loadEvents() {
+
+        const latitude = this.data.latitude;
+        const longitude = this.data.longitude;
+        const radius = this.models.radius * 1000;
+        const start = _DateService.get(this).getTimestamp(this.models.startDate);
+        const end = _DateService.get(this).getTimestamp(this.models.endDate);
+
+        _EventsService.get(this).fetchEvents(latitude, longitude, radius, start, end)
+            .then((data) => {
+                _$log.get(this).debug("events result", data);
+
+                _EventsService.get(this).setEvents(data.plain());
+
+                let events = [];
+
+                for(let i = 0, len = 4; i < len; i++) {
+                    let event = createEventMarker(i);
+                    events.push(event);
+                }
+
+                _MapsService.get(this).setEventMarkers(events);
+
+                this.states.fetchingEvents = false;
+
+                this.navigateForward();
+
+            }, (error) => {
+                _$log.get(this).warn("failed to retrieve events", error);
+                this.states.fetchingEvents = false;
+            });
+
+    }
+
+    _updateEvents(events) {
+        this.data.events = events;
+    }
+
+    _watchStates() {
+
+        // Watch Origin
+        _$scope.get(this).$watch(() => {
+            return _EventsService.get(this).getEvents();
+        }, (newVal, oldVal) => {
+
+            console.log("new events", newVal);
+            if(newVal) {
+                this._updateEvents(newVal);
+            }
+
+        });
+
     }
 
 }
