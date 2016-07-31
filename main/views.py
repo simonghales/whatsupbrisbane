@@ -37,8 +37,7 @@ def test(request):
 
 def events(request):
 
-    body_unicode = request.body.decode('utf-8')
-    body = json.loads(body_unicode)
+    body = request.GET
 
     lat = body['lat']
     lng = body['lng']
