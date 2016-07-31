@@ -1,3 +1,5 @@
+import { createEventMarker } from '../utilities/events';
+
 const _$log = new WeakMap();
 
 export default class MapsService {
@@ -13,6 +15,20 @@ export default class MapsService {
             origin: null,
             radius: null,
         };
+
+    }
+
+    createAndSetEventMarkers(events) {
+
+        let markers = [];
+
+        for(let i = 0, len = events.length; i < len; i++) {
+            let event = events[i];
+            let marker = createEventMarker(event, i);
+            markers.push(marker);
+        }
+
+        this.setEventMarkers(markers);
 
     }
 

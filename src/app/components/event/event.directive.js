@@ -3,7 +3,9 @@ export default class EventDirective {
         'ngInject';
 
         this.templateUrl = 'app/components/event/_event.html';
-        this.scope = false;
+        this.scope = {
+            data: "="
+        };
         this.restrict = 'E';
         this.replace = true;
 

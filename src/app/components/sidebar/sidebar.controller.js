@@ -133,7 +133,7 @@ export default class SidebarController {
 
         const latitude = this.data.latitude;
         const longitude = this.data.longitude;
-        const radius = this.models.radius * 1000;
+        const radius = this.models.radius;
         const start = _DateService.get(this).getTimestamp(this.models.startDate);
         const end = _DateService.get(this).getTimestamp(this.models.endDate);
 
@@ -143,14 +143,7 @@ export default class SidebarController {
 
                 _EventsService.get(this).setEvents(data.plain());
 
-                let events = [];
-
-                for(let i = 0, len = 4; i < len; i++) {
-                    let event = createEventMarker(i);
-                    events.push(event);
-                }
-
-                _MapsService.get(this).setEventMarkers(events);
+                _MapsService.get(this).createAndSetEventMarkers(data.plain());
 
                 this.states.fetchingEvents = false;
 
