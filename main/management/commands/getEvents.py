@@ -14,28 +14,30 @@ class Command(BaseCommand):
 
 		for event in allData:
                         # event is a dictionary describing that event
-                        newDBEvent = EventInfo()
-                        newDBEvent.title = event['title']
-                        newDBEvent.description = event['description']
-                        newDBEvent.cost = event['cost']
-                        newDBEvent.timeStart = dt.strptime(event['timeStart'],'%Y-%m-%dT%H:%M:%S')
-                        newDBEvent.timeStop = dt.strptime(event['timeStop'],'%Y-%m-%dT%H:%M:%S')
-                        newDBEvent.venue = event['venue']
-                        newDBEvent.venueAddress = event['venueAddress']
-                        newDBEvent.eventImage = event['eventImage']
-                        newDBEvent.bookings = event['bookings']
-                        newDBEvent.category = event['category']
-                        newDBEvent.weblink = event['weblink']
-                        newDBEvent.age = event['age']
-                        newDBEvent.meetingPoint = event['meetingPoint']
-                        newDBEvent.requirements = event['requirements']
-                        newDBEvent.showType = event['showType']
-                        newDBEvent.schedule = event['schedule']
-                        newDBEvent.outdoors = event['outdoors']
+                        if(event['venueAddress'] != ""):
 
-                        # also add the lat, lng to the other table
-                        createLatLong(newDBEvent.venueAddress)
+                                newDBEvent = EventInfo()
+                                newDBEvent.title = event['title']
+                                newDBEvent.description = event['description']
+                                newDBEvent.cost = event['cost']
+                                newDBEvent.timeStart = dt.strptime(event['timeStart'],'%Y-%m-%dT%H:%M:%S')
+                                newDBEvent.timeStop = dt.strptime(event['timeStop'],'%Y-%m-%dT%H:%M:%S')
+                                newDBEvent.venue = event['venue']
+                                newDBEvent.venueAddress = event['venueAddress']
+                                newDBEvent.eventImage = event['eventImage']
+                                newDBEvent.bookings = event['bookings']
+                                newDBEvent.category = event['category']
+                                newDBEvent.weblink = event['weblink']
+                                newDBEvent.age = event['age']
+                                newDBEvent.meetingPoint = event['meetingPoint']
+                                newDBEvent.requirements = event['requirements']
+                                newDBEvent.showType = event['showType']
+                                newDBEvent.schedule = event['schedule']
+                                newDBEvent.outdoors = event['outdoors']
 
-                        newDBEvent.save()
+                                # also add the lat, lng to the other table
+                                createLatLong(event['venueAddress'])
+
+                                newDBEvent.save()
 
 

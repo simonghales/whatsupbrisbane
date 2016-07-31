@@ -1,16 +1,20 @@
 #Gets the latitude and longitude for the given string
 #do NOT let it run heaps
 #run some test cases before unleashing it to populate the whole RSS feed
-import googlemaps
-from urllib.parse import urlencode as encode 
+import googlemaps 
 from .models import AddressLocation
 
 def addressToLatLong(address):
 
         gmaps = googlemaps.Client(key="AIzaSyA3U5sV5yEg7KY_Inl1iSaxVdFTXLb7aAk")
-        geocode = gmaps.geocode(encode(address))
-        latitude = geocode[0]['geometry']['location']['lat']
-        longitude = geocode[0]['geometry']['location']['lng']
+        geocode = gmaps.geocode(address)
+
+        latitude = None
+        longitude = None
+
+        if(len(geocode) != 0):
+                latitude = geocode[0]['geometry']['location']['lat']
+                longitude = geocode[0]['geometry']['location']['lng']
 
         return latitude, longitude
 
@@ -31,14 +35,17 @@ def findOrCreateLatLong(addressInput):
 
             return (address.lat,address.lng)
 
-def createLatLong(address):
+def createLatLong(addressInput):
 
-        lat,lng = addressToLatLong(address)
+        try:
+            address = AddressLocation.objects.get(address=addressInput)
+        except AddressLocation.DoesNotExist:
+            lat,lng = addressToLatLong(addressInput)
 
-        newAddress = AddressLocation()
-        newAddress.address = event.venueAddress
-        newAddress.lat = lat
-        newAddress.lng = lng
-        newAddress.save()
+            address = AddressLocation()
+            address.address = event.venueAddress
+            address.lat = lat
+            address.lng = lng
+            address.save()
 
         return

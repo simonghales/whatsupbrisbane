@@ -33,10 +33,8 @@ def readRSSFeeds():
 	items.pop(0) #Not an event
 	totalEventCount=0
 
-
-
 	for event in items:
-		#if totalEventCount==1:
+		#if totalEventCount==30:
 		#	break
 		eventSoup=BeautifulSoup(event, "html.parser")
 		#check whether event is already captured
@@ -50,7 +48,7 @@ def readRSSFeeds():
 			if eventList[i]['title']==eventTitle:
 				if eventList[i]['timeStart']==startTime:
 					captured=True
-					print(False," ",totalEventCount, eventTitle)
+					#print(False," ",totalEventCount, eventTitle)
 					break
 		
 		if captured==False:
@@ -104,14 +102,16 @@ def eventPopulate(eventSoup):
 			elif elementName in ignore:
 				continue
 			else:
-				print(eventSoup.title)
-				print("Capture Me Customfield:\n",elementName,element.string,"\n")
+                                continue
+				#print(eventSoup.title)
+				#print("Capture Me Customfield:\n",elementName,element.string,"\n")
 		elif element.name in ignore:
 			continue
 		else:
 			if type(element.name) == type(""):
-				print(eventSoup.title)
-				print("Capture Me :",element.name,"\n")
+                                x = true
+				#print(eventSoup.title)
+				#print("Capture Me :",element.name,"\n")
 		for i in eventSchema:
 			if eventSchema[i] == None:
 				eventSchema[i]=""
@@ -123,4 +123,4 @@ for i in x:
 	print(i["title"])
 	for f in i:
 		print(len(i[f]))
-""
+"""
