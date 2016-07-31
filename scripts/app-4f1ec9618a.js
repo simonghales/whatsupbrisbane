@@ -84,33 +84,37 @@
 
 	var _event2 = _interopRequireDefault(_event);
 
-	var _ngAutocomplete = __webpack_require__(19);
+	var _eventModal = __webpack_require__(19);
+
+	var _eventModal2 = _interopRequireDefault(_eventModal);
+
+	var _ngAutocomplete = __webpack_require__(20);
 
 	var _ngAutocomplete2 = _interopRequireDefault(_ngAutocomplete);
 
-	var _backimage = __webpack_require__(20);
+	var _backimage = __webpack_require__(21);
 
 	var _backimage2 = _interopRequireDefault(_backimage);
 
-	var _events = __webpack_require__(21);
+	var _events = __webpack_require__(22);
 
 	var _events2 = _interopRequireDefault(_events);
 
-	var _places = __webpack_require__(23);
+	var _places = __webpack_require__(24);
 
 	var _places2 = _interopRequireDefault(_places);
 
-	var _maps = __webpack_require__(24);
+	var _maps = __webpack_require__(25);
 
 	var _maps2 = _interopRequireDefault(_maps);
 
-	var _date = __webpack_require__(25);
+	var _date = __webpack_require__(26);
 
 	var _date2 = _interopRequireDefault(_date);
 
-	var _dateTime = __webpack_require__(26);
+	var _dateTime = __webpack_require__(27);
 
-	var _eventTime = __webpack_require__(27);
+	var _eventTime = __webpack_require__(28);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -118,7 +122,7 @@
 
 	'ngAnimate', 'ngCookies', 'ngSanitize', 'restangular', 'ui.router', 'toastr']).config(_index.config).config(_index2.routerConfig).run(_index3.runBlock).controller('MainController', _main.MainController).filter('dateTime', _dateTime.DateTime).filter('eventTime', _eventTime.EventTime);
 
-	(0, _register.register)('whatsupbrisbane').controller('SidebarController', _sidebar2.default).directive('sidebar', _sidebar4.default).directive('sidebarIntro', _intro2.default).directive('sidebarResults', _results2.default).directive('event', _event2.default).directive('ngAutocomplete', _ngAutocomplete2.default).directive('backImg', _backimage2.default);
+	(0, _register.register)('whatsupbrisbane').controller('SidebarController', _sidebar2.default).directive('sidebar', _sidebar4.default).directive('sidebarIntro', _intro2.default).directive('sidebarResults', _results2.default).directive('event', _event2.default).directive('eventModal', _eventModal2.default).directive('ngAutocomplete', _ngAutocomplete2.default).directive('backImg', _backimage2.default);
 
 	(0, _register.register)('whatsupbrisbane').controller('MapController', _map2.default).directive('mainMap', _map4.default);
 
@@ -1671,6 +1675,31 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var EventModalDirective = function EventModalDirective() {
+	    'ngInject';
+
+	    _classCallCheck(this, EventModalDirective);
+
+	    this.templateUrl = 'app/components/eventModal/_eventModal.html';
+	    this.scope = false;
+	    this.restrict = 'E';
+	    this.replace = true;
+	};
+
+	exports.default = EventModalDirective;
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	'use strict';
+
 	/**
 	 * A directive for adding google places autocomplete to a text box
 	 * google places autocomplete info: https://developers.google.com/maps/documentation/javascript/places
@@ -1852,7 +1881,7 @@
 	exports.default = AutocompleteDirective;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1903,7 +1932,7 @@
 	exports.default = BackImgDirective;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1914,7 +1943,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _endpoints = __webpack_require__(22);
+	var _endpoints = __webpack_require__(23);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1976,7 +2005,7 @@
 	exports.default = EventsService;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1989,7 +2018,7 @@
 	var SEARCH_AUTOCOMPLETE = exports.SEARCH_AUTOCOMPLETE = '/autocomplete/json';
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2002,7 +2031,7 @@
 
 	var _constants = __webpack_require__(3);
 
-	var _endpoints = __webpack_require__(22);
+	var _endpoints = __webpack_require__(23);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2049,7 +2078,7 @@
 	exports.default = PlacesService;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2139,7 +2168,7 @@
 	exports.default = MapsService;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2196,7 +2225,7 @@
 	exports.default = DateService;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2219,7 +2248,7 @@
 	}
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2244,10 +2273,10 @@
 /***/ }
 /******/ ]);
 angular.module("whatsupbrisbane").run(["$templateCache", function($templateCache) {$templateCache.put("app/main/main.html","<div class=\"main-layout page-wrapper\"><!--<ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\"></ui-gmap-google-map>--><div class=main-layout__sidebar><sidebar></sidebar></div><div class=main-layout__content><main-map></main-map></div></div>");
+$templateCache.put("app/components/eventModal/_eventModal.html","<div class=modal>EVENT MODAL GOES HERE</div>");
 $templateCache.put("app/components/event/_event.html","<div class=event><div class=event__thumb back-img={{::data.image}}></div><div class=event__info><h3 class=event__title ng-bind=::data.title></h3><ul class=event__details><li><div class=\"icon icon-clock\"></div><div class=info><p>Start: <span ng-bind=\"::data.timeStart | eventTime\"></span></p><p>End: <span ng-bind=\"::data.timeStop | eventTime\"></span></p></div></li><li><div class=\"icon icon-location\"></div><div class=info><p ng-bind=::data.address></p></div></li><!--<li ng-if=\"::data.weblink\">--><!--<span class=\"icon icon-link-ext\"></span> <span><a ng-href=\"{{::data.weblink}}\" ng-bind=\"::data.weblink\" target=\"_blank\"></a></span>--><!--</li>--></ul></div></div>");
-$templateCache.put("app/components/eventModal/_eventModal.html","<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><title>Title</title></head><body></body></html>");
-$templateCache.put("app/components/map/_map.html","<div class=map><ui-gmap-google-map ng-if=mapVM.states.mapLoaded events=mapVM.state.map.events options=mapVM.state.map.mapOptions center=mapVM.state.map.center zoom=mapVM.state.map.zoom draggable=true control=mapVM.state.googlemap><ui-gmap-circle center=mapVM.state.radiusCircle.center radius=mapVM.state.radiusCircle.radius fill=mapVM.state.radiusCircle.fill></ui-gmap-circle><ui-gmap-marker coords=mapVM.state.originMarker.coords options=mapVM.state.originMarker.options events=mapVM.state.originMarker.events idkey=mapVM.state.originMarker.id></ui-gmap-marker><div ng-if=mapVM.state.eventMarkers><ui-gmap-markers models=mapVM.state.eventMarkers events=mapVM.config.actionEvents coords=\"\'self\'\" icon=\"\'icon\'\"></ui-gmap-markers></div></ui-gmap-google-map></div>");
+$templateCache.put("app/components/map/_map.html","<div class=map><ui-gmap-google-map ng-if=mapVM.states.mapLoaded events=mapVM.state.map.events options=mapVM.state.map.mapOptions center=mapVM.state.map.center zoom=mapVM.state.map.zoom draggable=true control=mapVM.state.googlemap><ui-gmap-circle center=mapVM.state.radiusCircle.center radius=mapVM.state.radiusCircle.radius fill=mapVM.state.radiusCircle.fill></ui-gmap-circle><ui-gmap-marker coords=mapVM.state.originMarker.coords options=mapVM.state.originMarker.options events=mapVM.state.originMarker.events idkey=mapVM.state.originMarker.id></ui-gmap-marker><div ng-if=mapVM.state.eventMarkers><ui-gmap-markers models=mapVM.state.eventMarkers events=mapVM.config.actionEvents coords=\"\'self\'\" icon=\"\'icon\'\"></ui-gmap-markers></div></ui-gmap-google-map><!--<event-modal />--></div>");
 $templateCache.put("app/components/sidebar/_sidebar.html","<div class=sidebar ng-class=\"{\n        \'tab--intro\': sidebarVM.states.currentTab === sidebarVM.tabs.intro,\n        \'tab--results\': sidebarVM.states.currentTab === sidebarVM.tabs.results\n     }\"><header class=sidebar__header><div class=\"nav__btn nav__btn--left\" ng-show=\"sidebarVM.states.currentTab === sidebarVM.tabs.results\" ng-click=sidebarVM.navigatePrevious()><div class=\"icon icon-left-big\"></div><div class=text>Return</div></div><div class=\"nav__btn nav__btn--right\" ng-show=\"sidebarVM.data.events.length && (sidebarVM.states.currentTab != sidebarVM.tabs.results)\" ng-click=sidebarVM.navigateForward()><div class=text>Return to results</div><div class=\"icon icon-right-big\"></div></div></header><sidebar-intro ng-if=\"sidebarVM.states.currentTab === sidebarVM.tabs.intro\"><sidebar-results ng-if=\"sidebarVM.states.currentTab === sidebarVM.tabs.results\"></div>");
 $templateCache.put("app/components/sidebar/intro/_intro.html","<div class=sidebar__content><div class=sidebar__intro><h1 class=sidebar__title>What\'s Up Brisbane</h1><p class=sidebar__desc>Check out local events happening in Brisbane</p></div><form class=sidebar__form><section class=sidebar__form__section><header class=sidebar__form__section__header><span class=\"icon icon-location\"></span><h3>Location</h3></header><div class=sidebar__input><label><h3>Starting Location</h3><input ng-model=sidebarVM.models.location ng-autocomplete details=sidebarVM.data.location.details type=text></label></div><div class=sidebar__input><label><h3>Radius <span>(kilometres)</span></h3><rzslider rz-slider-options=sidebarVM.config.slider.options rz-slider-model=sidebarVM.models.radius></rzslider><!--<input  ng-model=\"sidebarVM.models.radius\"--><!--ng-change=\"sidebarVM.updateRadius()\"--><!--type=\"text\" />--></label></div></section><section class=\"sidebar__form__section sidebar__form__section--datetime\"><header class=sidebar__form__section__header><span class=\"icon icon-clock\"></span><h3>Date & Time Range</h3></header><div class=sidebar__input><label moment-picker=sidebarVM.models.startDate min-view=month max-view=day start-view=month today=true autoclose=true disable=sidebarVM.states.startDateDisabled><h3>Starting Time</h3><div class=div-fake-input><div ng-bind=\"sidebarVM.models.startDate | dateTime\"></div></div></label></div><div class=sidebar__input><label moment-picker=sidebarVM.models.endDate min-view=month max-view=day start-view=month today=true autoclose=true disable=sidebarVM.states.endDateDisabled><h3>End Time</h3><div class=div-fake-input><div ng-bind=\"sidebarVM.models.endDate | dateTime\"></div></div></label></div></section><div class=sidebar__submit><button class=btn-submit ng-class=\"{\n                        \'state--disabled\': !sidebarVM.canFindEvents()\n                    }\" ng-click=sidebarVM.findEvents()><span ng-hide=sidebarVM.states.fetchingEvents>Find Events</span> <span ng-show=sidebarVM.states.fetchingEvents>Finding Events...</span></button></div></form></div>");
 $templateCache.put("app/components/sidebar/results/_results.html","<div class=sidebar__content><div class=sidebar__results><h2 class=sidebar__title>Results</h2></div><ul class=sidebar__events-list><li ng-repeat=\"event in sidebarVM.data.events\"><event data=event></li></ul></div>");}]);
-//# sourceMappingURL=../maps/scripts/app-57d64e884c.js.map
+//# sourceMappingURL=../maps/scripts/app-4f1ec9618a.js.map
