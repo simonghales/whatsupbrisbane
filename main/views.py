@@ -43,7 +43,7 @@ def events(request):
     lng = float(body['lng'])
     current_location = (lat,lng)
     
-    radius = body['radius']
+    radius = float(body['radius'])
     timeStart = body['start']
     timeStop = body['end']
 
