@@ -1,0 +1,30 @@
+%shared-btn-reset {
+  @extend %font--default;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+}
+
+%shared-input-reset {
+  @extend %font--default;
+  border: 0;
+  font-size: 1em;
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+
+}
+
+%shared-block {
+  border: 1px solid #141414;
+  padding: 8px;
+}

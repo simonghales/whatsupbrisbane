@@ -1,0 +1,32 @@
+// Mobile
+$dates-width: 1200px;
+$small-width: 900px;
+
+@mixin responsive-dates {
+  @media (max-width: #{$dates-width}) {
+    @content;
+  }
+}
+
+
+@mixin responsive-small {
+  @media (max-width: #{$small-width}) {
+    @content;
+  }
+}
+
+.hide--small {
+
+  @include responsive-small {
+    display: none;
+  }
+
+}
+
+.show--small {
+
+  @include responsive-small {
+    display: block;
+  }
+
+}

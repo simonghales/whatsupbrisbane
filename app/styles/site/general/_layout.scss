@@ -1,0 +1,21 @@
+
+$layout-sizes: (
+  headerHeight: 56px,
+  sidebarWidth: 380px
+);
+
+.main-layout {
+  @extend .clearfix;
+  height: 100%;
+}
+
+  .main-layout__sidebar {
+    float: left;
+    height: 100%;
+    width: map_get($layout-sizes, sidebarWidth);
+  }
+
+  .main-layout__content {
+    height: 100%;
+    overflow: hidden;
+  }

@@ -1,0 +1,129 @@
+//** Generates state classes used to hide / reveal sections of the site
+
+// List of states that get iterated through
+$states-list: busy;
+
+%state-show {
+  display: none;
+
+  &.m--opacity {
+    display: block;
+    opacity: 0;
+
+    &.m--inline {
+      display: inline-block;
+    }
+
+  }
+
+  &.m--visibility {
+    display: block;
+    visibility: hidden;
+  }
+
+  &.m--visibility.m--inline {
+      display: inline-block;
+  }
+
+}
+
+%state-active {
+  display: block;
+
+  &.m--inline {
+    display: inline-block;
+  }
+
+  &.m--opacity {
+    opacity: 1;
+  }
+
+  &.m--visibility {
+    display: block;
+    visibility: visible;
+  }
+
+  &.m--visibility.m--inline {
+    display: inline-block;
+  }
+
+}
+
+%state-hide {
+  display: none;
+
+  &.m--opacity {
+    display: block;
+    opacity: 0;
+
+    &.m--inline {
+      display: inline-block;
+    }
+
+  }
+
+  &.m--visibility {
+    display: block;
+    visibility: hidden;
+
+    &.m--inline {
+      display: inline-block;
+    }
+
+  }
+
+  &.m--visibility.m--inline {
+    display: inline-block;
+  }
+
+}
+
+@each $current-state in $states-list {
+
+  .show--#{$current-state} {
+    @extend %state-show;
+  }
+
+  .state--#{$current-state} .show--#{$current-state},
+  .state--#{$current-state}.show--#{$current-state} {
+    @extend %state-active;
+  }
+
+  .state--#{$current-state} .hide--#{$current-state},
+  .state--#{$current-state}.hide--#{$current-state} {
+    @extend %state-hide;
+  }
+
+}
+
+.state--hide {
+  display: none;
+}
+
+.hide--visibility {
+  visibility: hidden;
+}
+
+.theme--wonder {
+
+  .hide--wonder {
+    display: none;
+  }
+
+}
+
+.theme--whitelabel {
+
+  .hide--whitelabel {
+    display: none;
+  }
+
+}
+
+.theme--primary {
+
+  .hide--primary {
+    display: none;
+  }
+
+}

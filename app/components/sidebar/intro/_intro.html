@@ -1,0 +1,82 @@
+<div class="sidebar__content">
+    <div class="sidebar__intro">
+        <h1 class="sidebar__title">What's Up Brisbane</h1>
+        <p class="sidebar__desc">
+            Check out local events happening in Brisbane
+        </p>
+    </div>
+    <form class="sidebar__form">
+        <section class="sidebar__form__section">
+            <header class="sidebar__form__section__header">
+                <span class="icon icon-location"></span>
+                <h3>Location</h3>
+            </header>
+            <div class="sidebar__input">
+                <label>
+                    <h3>Starting Location</h3>
+                    <input ng-model="sidebarVM.models.location"
+                           ng-autocomplete
+                           details="sidebarVM.data.location.details"
+                           type="text" />
+                </label>
+            </div>
+            <div class="sidebar__input">
+                <label>
+                    <h3>Radius <span>(kilometres)</span></h3>
+                    <rzslider
+                            rz-slider-options="sidebarVM.config.slider.options"
+                            rz-slider-model="sidebarVM.models.radius"></rzslider>
+                    <!--<input  ng-model="sidebarVM.models.radius"-->
+                    <!--ng-change="sidebarVM.updateRadius()"-->
+                    <!--type="text" />-->
+                </label>
+            </div>
+        </section>
+        <section class="sidebar__form__section sidebar__form__section--datetime">
+            <header class="sidebar__form__section__header">
+                <span class="icon icon-clock"></span>
+                <h3>Date & Time Range</h3>
+            </header>
+            <div class="sidebar__input">
+                <label
+                        moment-picker="sidebarVM.models.startDate"
+                        min-view="month"
+                        max-view="day"
+                        start-view="month"
+                        today="true"
+                        autoclose="true"
+                        disable="sidebarVM.states.startDateDisabled">
+                    <h3>Starting Time</h3>
+                    <div class="div-fake-input">
+                        <div ng-bind="sidebarVM.models.startDate | dateTime"></div>
+                    </div>
+                </label>
+            </div>
+            <div class="sidebar__input">
+                <label
+                        moment-picker="sidebarVM.models.endDate"
+                        min-view="month"
+                        max-view="day"
+                        start-view="month"
+                        today="true"
+                        autoclose="true"
+                        disable="sidebarVM.states.endDateDisabled">
+                    <h3>End Time</h3>
+                    <div class="div-fake-input">
+                        <div ng-bind="sidebarVM.models.endDate | dateTime"></div>
+                    </div>
+                </label>
+            </div>
+        </section>
+        <div class="sidebar__submit">
+            <button class="btn-submit"
+                    ng-class="{
+                        'state--disabled': !sidebarVM.canFindEvents()
+                    }"
+                    ng-click="sidebarVM.findEvents()">
+                <span ng-hide="sidebarVM.states.fetchingEvents">Find Events</span>
+                <span ng-show="sidebarVM.states.fetchingEvents">Finding Events...</span>
+            </button>
+        </div>
+    </form>
+</div>

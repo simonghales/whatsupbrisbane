@@ -1,0 +1,12 @@
+body {
+  background-color: #{map_get($colours, background)};
+  //@include background-gradient(#f9f9f9, #f4f4f4);
+  //background-image: url(/assets/images/background/background.jpg);
+  //background-size: cover;
+  //background-attachment: fixed;
+}
+
+
+html, body, .app-container {
+  height: 100%;
+}
