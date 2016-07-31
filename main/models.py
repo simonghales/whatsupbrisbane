@@ -12,8 +12,6 @@ class EventInfo(models.Model):
 	timeStop = models.DateTimeField(null=True, blank=True)
 	venue = models.TextField(default=text_default)
 	venueAddress = models.TextField(default=text_default)
-	latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-	longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
 	eventImage = models.TextField(default=text_default)
 	bookings = models.TextField(default=text_default)
 	category = models.TextField(default=text_default)
