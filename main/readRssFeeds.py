@@ -45,13 +45,14 @@ def readRSSFeeds():
 			if element.name=="x-trumba:localstart":
 				startTime=element.string
 		eventTitle=eventSoup.title.string
-		"""
-		for i in range(len(eventSchema['title'])):
-			if eventSchema['title'][i]==eventTitle:
-				if eventSchema['timeStart'][i]==startTime:
+		
+		for i in range(len(eventList)):
+			if eventList[i]['title']==eventTitle:
+				if eventList[i]['timeStart']==startTime:
 					captured=True
+					print(False," ",totalEventCount, eventTitle)
 					break
-		"""
+		
 		if captured==False:
 			eventList.append(eventPopulate(eventSoup))
 			totalEventCount+=1
@@ -111,7 +112,15 @@ def eventPopulate(eventSoup):
 			if type(element.name) == type(""):
 				print(eventSoup.title)
 				print("Capture Me :",element.name,"\n")
+		for i in eventSchema:
+			if eventSchema[i] == None:
+				eventSchema[i]=""
 	return eventSchema
 
-#x=readRSSFeeds()
-#print(x[50])
+"""
+x=readRSSFeeds()
+for i in x:
+	print(i["title"])
+	for f in i:
+		print(len(i[f]))
+""
