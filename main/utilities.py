@@ -13,14 +13,14 @@ def addressToLatLong(address):
 
         return latitude, longitude
 
-def findOrCreateLatLong(address_input):
+def findOrCreateLatLong(addressInput):
                 
         try:
-            address = AddressLocation.objects.get(address=address_input)
+            address = AddressLocation.objects.get(address=addressInput)
             return (address.lat,address.lng)
         except AddressLocation.DoesNotExist:
             # if it doesn't exist, convert address to lat and lng and add it
-            lat,lng = addressToLatLong(address_input)
+            lat,lng = addressToLatLong(addressInput)
 
             address = AddressLocation()
             address.address = event.venueAddress
@@ -29,3 +29,15 @@ def findOrCreateLatLong(address_input):
             address.save()
 
             return (address.lat,address.lng)
+
+def createLatLong(address):
+
+        lat,lng = addressToLatLong(address)
+
+        newAddress = AddressLocation()
+        newAddress.address = event.venueAddress
+        newAddress.lat = lat
+        newAddress.lng = lng
+        newAddress.save()
+
+        return

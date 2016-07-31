@@ -58,10 +58,29 @@ def events(request):
         event_location = findOrCreateLatLong(event.venueAddress)
         
         if(event.timeStart >= timeStart and
-           event.timeEnd <= timeEnd and
+           event.timeStop <= timeStop and
            haversine(event_location, current_location) < radius):
 
-            selectedEvents.append({"name": event.title, "lat": event_location[0], "lng": event_location[1], "description": event.description})
+            selectedEvents.append({"title": event.title,
+                                   "description": event.description,
+                                   "cost": event.cost,
+                                   "timeStart": event.timeStart,
+                                   "timeStop": event.timeStop,
+                                   "venue": event.venue,
+                                   "address": event.venueAddress,
+                                   "lat": event_location[0],
+                                   "lng": event_location[1],
+                                   "image": event.eventImage,
+                                   "bookings": event.bookings,
+                                   "category": event.category,
+                                   "weblink": event.weblink,
+                                   "age": event.age,
+                                   "meetingPoint": event.meetingPoint,
+                                   "requirements": event.requirements,
+                                   "showType": event.showType,
+                                   "schedule": event.schedule,
+                                   "outdoors": event.outdoors,
+                                   })
 
     response = HttpResponse(json.dumps(selectedEvents))
     response["Access-Control-Allow-Origin"] = "*"  
@@ -76,7 +95,26 @@ def allEvents(request):
     selectedEvents = []
 
     for event in allEvents:
-        selectedEvents.append({"name": event.title, "lat": address.lat, "lng": address.lng, "description": event.description})
+        selectedEvents.append({"title": event.title,
+                               "description": event.description,
+                               "cost": event.cost,
+                               "timeStart": event.timeStart,
+                               "timeStop": event.timeStop,
+                               "venue": event.venue,
+                               "address": event.venueAddress,
+                               "lat": event_location[0],
+                               "lng": event_location[1],
+                               "image": event.eventImage,
+                               "bookings": event.bookings,
+                               "category": event.category,
+                               "weblink": event.weblink,
+                               "age": event.age,
+                               "meetingPoint": event.meetingPoint,
+                               "requirements": event.requirements,
+                               "showType": event.showType,
+                               "schedule": event.schedule,
+                               "outdoors": event.outdoors,
+                               })
         
     response = HttpResponse(json.dumps(selectedEvents))
     response["Access-Control-Allow-Origin"] = "*"  
