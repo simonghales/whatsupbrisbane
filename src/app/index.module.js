@@ -15,10 +15,14 @@ import AutocompleteDirective from './components/ngAutocomplete';
 import EventsService from './services/events.service';
 import PlacesService from './services/places.service';
 import MapsService from './services/maps.service';
+import DateService from './services/date.service';
+import { DateTime } from './filters/dateTime.filter';
 
 angular.module('whatsupbrisbane',
     [
 
+        'angularMoment',
+        'rzModule',
         'moment-picker',
         'uiGmapgoogle-maps',
         'ngMap', // remove this
@@ -31,10 +35,11 @@ angular.module('whatsupbrisbane',
         'toastr'
     ]
     )
-  .config(config)
-  .config(routerConfig)
-  .run(runBlock)
-  .controller('MainController', MainController);
+    .config(config)
+    .config(routerConfig)
+    .run(runBlock)
+    .controller('MainController', MainController)
+    .filter('dateTime', DateTime);
 
 register('whatsupbrisbane')
     .controller('SidebarController', SidebarController)
@@ -51,4 +56,5 @@ register('whatsupbrisbane')
 register('whatsupbrisbane')
     .service('EventsService', EventsService)
     .service('PlacesService', PlacesService)
-    .service('MapsService', MapsService);
+    .service('MapsService', MapsService)
+    .service('DateService', DateService);

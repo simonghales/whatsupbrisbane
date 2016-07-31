@@ -3,19 +3,31 @@ import { SIDEBAR_TAB_INTRO, SIDEBAR_TAB_RESULTS } from '../../constants/sidebar'
 
 const _$log = new WeakMap();
 const _$scope = new WeakMap();
+const _DateService = new WeakMap();
 const _MapsService = new WeakMap();
 const _PlacesService = new WeakMap();
 const _uiGmapGoogleMapApi = new WeakMap();
 
 export default class SidebarController {
-    constructor ($log, $scope, MapsService, PlacesService, uiGmapGoogleMapApi) {
+    constructor ($log, $scope, DateService, MapsService, PlacesService, uiGmapGoogleMapApi) {
         'ngInject';
 
         _$log.set(this, $log);
         _$scope.set(this, $scope);
+        _DateService.set(this, DateService);
         _MapsService.set(this, MapsService);
         _PlacesService.set(this, PlacesService);
         _uiGmapGoogleMapApi.set(this, uiGmapGoogleMapApi);
+
+        this.config = {
+          slider: {
+              options: {
+                  floor: 1,
+                  ceil: 20,
+                  onChange: this.updateRadius.bind(this)
+              }
+          }
+        };
 
         this.data = {
           location: {
@@ -24,10 +36,10 @@ export default class SidebarController {
         };
 
         this.models = {
-            endDate: '',
+            endDate: _DateService.get(this).getDefaultEndingDate(),
             location: '',
-            radius: 2000,
-            startDate: ''
+            radius: 3,
+            startDate: _DateService.get(this).getDefaultStartingDate()
         };
 
         this.tabs = {
@@ -87,9 +99,10 @@ export default class SidebarController {
     }
 
     updateRadius() {
+
         let { radius } = this.models;
 
-        radius = parseInt(radius);
+        radius = parseInt(radius) * 1000; // convert from km to m
 
         _MapsService.get(this).setRadius(radius);
     }

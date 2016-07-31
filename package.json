@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "dependencies": {
     "fontawesome-markers": "^4.6.1",
-    "json-loader": "^0.5.4"
+    "json-loader": "^0.5.4",
+    "moment": "^2.14.1"
   },
   "scripts": {
     "test": "gulp test"

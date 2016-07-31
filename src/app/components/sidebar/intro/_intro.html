@@ -6,57 +6,68 @@
         </p>
     </div>
     <form class="sidebar__form">
-        <div class="sidebar__input">
-            <label>
-                <h3>Starting Location</h3>
-                <input ng-model="sidebarVM.models.location"
-                       ng-autocomplete
-                       details="sidebarVM.data.location.details"
-                       type="text" />
-            </label>
-        </div>
-        <div class="sidebar__input">
-            <label>
-                <h3>Accepted Distance Radius <span>(metres)</span></h3>
-                <input  ng-model="sidebarVM.models.radius"
-                        ng-change="sidebarVM.updateRadius()"
-                        type="text" />
-            </label>
-        </div>
-        <div class="sidebar__input">
-            <label>
-                <h3>Starting Time</h3>
-                <input
-                        ng-model="sidebarVM.models.startDate"
+        <section class="sidebar__form__section">
+            <header class="sidebar__form__section__header">
+                <span class="icon icon-location"></span>
+                <h3>Location</h3>
+            </header>
+            <div class="sidebar__input">
+                <label>
+                    <h3>Starting Location</h3>
+                    <input ng-model="sidebarVM.models.location"
+                           ng-autocomplete
+                           details="sidebarVM.data.location.details"
+                           type="text" />
+                </label>
+            </div>
+            <div class="sidebar__input">
+                <label>
+                    <h3>Accepted Distance Radius <span>(kilometres)</span></h3>
+                    <rzslider
+                            rz-slider-options="sidebarVM.config.slider.options"
+                            rz-slider-model="sidebarVM.models.radius"></rzslider>
+                    <!--<input  ng-model="sidebarVM.models.radius"-->
+                    <!--ng-change="sidebarVM.updateRadius()"-->
+                    <!--type="text" />-->
+                </label>
+            </div>
+        </section>
+        <section class="sidebar__form__section sidebar__form__section--datetime">
+            <header class="sidebar__form__section__header">
+                <span class="icon icon-clock"></span>
+                <h3>Date & Time Range</h3>
+            </header>
+            <div class="sidebar__input">
+                <label
                         moment-picker="sidebarVM.models.startDate"
                         min-view="month"
                         max-view="day"
                         start-view="month"
                         today="true"
                         autoclose="true"
-                        disable="sidebarVM.states.startDateDisabled"
-                        readonly
-                        type="text"
-                        placeholder="Enter a starting date"/>
-            </label>
-        </div>
-        <div class="sidebar__input">
-            <label>
-                <h3>End Time</h3>
-                <input
-                        ng-model="sidebarVM.models.endDate"
+                        disable="sidebarVM.states.startDateDisabled">
+                    <h3>Starting Time</h3>
+                    <div class="div-fake-input">
+                        <div ng-bind="sidebarVM.models.startDate | dateTime"></div>
+                    </div>
+                </label>
+            </div>
+            <div class="sidebar__input">
+                <label
                         moment-picker="sidebarVM.models.endDate"
                         min-view="month"
                         max-view="day"
                         start-view="month"
                         today="true"
                         autoclose="true"
-                        disable="sidebarVM.states.endDateDisabled"
-                        readonly
-                        type="text"
-                        placeholder="Enter an ending date"/>
-            </label>
-        </div>
+                        disable="sidebarVM.states.endDateDisabled">
+                    <h3>End Time</h3>
+                    <div class="div-fake-input">
+                        <div ng-bind="sidebarVM.models.endDate | dateTime"></div>
+                    </div>
+                </label>
+            </div>
+        </section>
         <div class="sidebar__submit">
             <button class="btn-submit"
                     ng-click="sidebarVM.findEvents()">Find Events</button>

@@ -4,7 +4,7 @@
 
 .btn-submit {
   @extend .btn;
-  @include border-radius(3px);
+  //@include border-radius(3px);
   background-color: #2FC4FF;
   color: #FFFFFF;
   font-weight: 700;
