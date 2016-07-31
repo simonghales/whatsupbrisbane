@@ -22,18 +22,18 @@ def findOrCreateLatLong(addressInput):
                 
         try:
             address = AddressLocation.objects.get(address=addressInput)
-            return (address.lat,address.lng)
+            return (address.latitude,address.longitude)
         except AddressLocation.DoesNotExist:
             # if it doesn't exist, convert address to lat and lng and add it
             lat,lng = addressToLatLong(addressInput)
 
             address = AddressLocation()
             address.address = addressInput
-            address.lat = lat
-            address.lng = lng
+            address.latitude = lat
+            address.longitude = lng
             address.save()
 
-            return (address.lat,address.lng)
+            return (address.latitude,address.longitude)
 
 def createLatLong(addressInput):
 
@@ -44,8 +44,8 @@ def createLatLong(addressInput):
 
             address = AddressLocation()
             address.address = addressInput
-            address.lat = lat
-            address.lng = lng
+            address.latitude = lat
+            address.longitude = lng
             address.save()
 
         return
