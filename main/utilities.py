@@ -21,7 +21,10 @@ def findOrCreateLatLong(addressInput):
                 
         try:
             address = AddressLocation.objects.get(address=addressInput)
-            return (float(address.latitude),float(address.longitude))
+            if(address.latitude == None or address.longitude == None):
+                    return None,None
+            else:
+                    return (float(address.latitude),float(address.longitude))
         except AddressLocation.DoesNotExist:
             # if it doesn't exist, convert address to lat and lng and add it
             lat,lng = addressToLatLong(addressInput)
