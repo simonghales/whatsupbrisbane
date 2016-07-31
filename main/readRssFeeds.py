@@ -25,35 +25,54 @@ eventSchemaTemplate = {
 
 def readRSSFeeds():
 	eventList=[]
-	response = request.urlopen("http://www.trumba.com/calendars/events-in-brisbane.rss")
-	bulktext = response.read().decode("utf-8")
-
-	#Splits the events up into a list
-	items = bulktext.split("<item>")
-	items.pop(0) #Not an event
 	totalEventCount=0
+	rssList =["http://www.trumba.com/calendars/events-in-brisbane.rss",
+		"http://www.trumba.com/calendars/active-parks.rss",
+		"http://www.trumba.com/calendars/brisbane-botanic-gardens.rss?filterview=Botanic%20Gardens",
+		"http://www.trumba.com/calendars/brisbane-powerhouse.rss",
+		"http://www.trumba.com/calendars/BiB.rss",
+		"http://www.trumba.com/calendars/chill-out.rss",
+		"http://www.trumba.com/calendars/city-hall.rss?filterview=city-hall",
+		"http://www.trumba.com/calendars/gold.rss",
+		"http://www.trumba.com/calendars/green-events.rss?filterview=green_events",
+		"http://www.trumba.com/calendars/libraries.rss",
+		"http://www.trumba.com/calendars/mobile-library.rss",
+		"http://www.trumba.com/calendars/LIVE.rss",
+		"http://www.trumba.com/calendars/mob.rss",
+		"http://www.trumba.com/calendars/planetarium.rss",
+		"http://www.trumba.com/calendars/brisbanes-calendar-venues-calendar.rss?filterview=Valley%20Malls",
+		"http://www.trumba.com/calendars/visble-ink.rss?filterview=vis_ink_valley"]
+	for rssURL in rssList:
+		response = request.urlopen(rssURL)
+		bulktext = response.read().decode("utf-8")
+		#print(rssURL)
 
-	for event in items:
-		#if totalEventCount==30:
-		#	break
-		eventSoup=BeautifulSoup(event, "html.parser")
-		#check whether event is already captured
-		captured=False
-		for element in eventSoup:
-			if element.name=="x-trumba:localstart":
-				startTime=element.string
-		eventTitle=eventSoup.title.string
+		#Splits the events up into a list
+		items = bulktext.split("<item>")
+		items.pop(0) #Not an event
 		
-		for i in range(len(eventList)):
-			if eventList[i]['title']==eventTitle:
-				if eventList[i]['timeStart']==startTime:
-					captured=True
-					#print(False," ",totalEventCount, eventTitle)
-					break
-		
-		if captured==False:
-			eventList.append(eventPopulate(eventSoup))
-			totalEventCount+=1
+
+		for event in items:
+			#if totalEventCount==30:
+			#	break
+			eventSoup=BeautifulSoup(event, "html.parser")
+			#check whether event is already captured
+			captured=False
+			for element in eventSoup:
+				if element.name=="x-trumba:localstart":
+					startTime=element.string
+			eventTitle=eventSoup.title.string
+			
+			for i in range(len(eventList)):
+				if eventList[i]['title']==eventTitle:
+					if eventList[i]['timeStart']==startTime:
+						captured=True
+						#print(False," ",totalEventCount, eventTitle)
+						break
+			
+			if captured==False:
+				eventList.append(eventPopulate(eventSoup))
+				totalEventCount+=1
 
 	return eventList
 
@@ -76,7 +95,10 @@ def eventPopulate(eventSoup):
 		elif element.name=="x-trumba:weblink":
 			eventSchema["weblink"]=element.string
 		elif element.name=="x-trumba:categorycalendar":
-			eventSchema["category"]=element.string.split("|")[1]
+			try:
+				eventSchema["category"]=element.string.split("|")[1]
+			except:
+				eventSchema["category"]=element.string
 		elif element.name=="x-trumba:customfield":
 			elementName=element.attrs["name"]
 			if elementName=="Event image":
@@ -119,8 +141,12 @@ def eventPopulate(eventSoup):
 
 """
 x=readRSSFeeds()
+print(len(x))
+print(x[0])
+
 for i in x:
 	print(i["title"])
 	for f in i:
 		print(len(i[f]))
+
 """
