@@ -3,29 +3,28 @@ from bs4 import BeautifulSoup
 
 from urllib import request
 
-def readRSSFeeds():
-	eventSchema = {
-		"title" : [],
-		"description" : [],
-		"cost" : [],
-		"timeStart" : [],
-		"timeStop" : [],
-		"venue" : [],
-		"venueAddress" : [],
-		"latitude" : [],
-		"longitude" : [],
-		"eventImage" : [],
-		"bookings" : [],
-		"category" : [],
-		"weblink" : [],
-		"age" : [],
-		"meetingPoint" : [],
-		"requirements" : [],
-		"showType" : [],
-		"schedule" : [],
-		"outdoors" : []
+eventSchemaTemplate = {
+		"title" : "",
+		"description" : "",
+		"cost" : "",
+		"timeStart" : "",
+		"timeStop" : "",
+		"venue" : "",
+		"venueAddress" : "",
+		"eventImage" : "",
+		"bookings" : "",
+		"category" : "",
+		"weblink" : "",
+		"age" : "",
+		"meetingPoint" : "",
+		"requirements" : "",
+		"showType" : "",
+		"schedule" : "",
+		"outdoors" : ""
 		}
 
+def readRSSFeeds():
+	eventList=[]
 	response = request.urlopen("http://www.trumba.com/calendars/events-in-brisbane.rss")
 	bulktext = response.read().decode("utf-8")
 
@@ -34,8 +33,10 @@ def readRSSFeeds():
 	items.pop(0) #Not an event
 	totalEventCount=0
 
+
+
 	for event in items:
-		#if totalEventCount==50:
+		#if totalEventCount==1:
 		#	break
 		eventSoup=BeautifulSoup(event, "html.parser")
 		#check whether event is already captured
@@ -44,21 +45,21 @@ def readRSSFeeds():
 			if element.name=="x-trumba:localstart":
 				startTime=element.string
 		eventTitle=eventSoup.title.string
+		"""
 		for i in range(len(eventSchema['title'])):
 			if eventSchema['title'][i]==eventTitle:
 				if eventSchema['timeStart'][i]==startTime:
 					captured=True
 					break
-
+		"""
 		if captured==False:
-			eventSchema=eventAdd(eventSchema,eventSoup)
+			eventList.append(eventPopulate(eventSoup))
 			totalEventCount+=1
 
-	return eventSchema
+	return eventList
 
-def eventAdd(eventSchema,eventSoup):
-	for key in eventSchema:
-		eventSchema[key].append("")
+def eventPopulate(eventSoup):
+	eventSchema=eventSchemaTemplate.copy()
 	ignore=["category","description","link","x-trumba:ealink","guid",
 		"x-trumba:masterid","xcal:summary","xcal:location","xcal:dtstart",
 		"x-trumba:formatteddatetime","xcal:dtend","x-microsoft:cdo-alldayevent",
@@ -66,41 +67,39 @@ def eventAdd(eventSchema,eventSoup):
 		"Boat ramp facilities","Community hall"]
 	for element in eventSoup:
 		if element.name=="x-trumba:localstart":
-			eventSchema["timeStart"][-1]=element.string
+			eventSchema["timeStart"]=element.string
 		elif element.name=="x-trumba:localend":
-			eventSchema["timeStop"][-1]=element.string
+			eventSchema["timeStop"]=element.string
 		elif element.name=="title":
-			eventSchema['title'][-1]=element.string
+			eventSchema['title']=element.string
 		elif element.name=="xcal:description":
-			eventSchema['description'][-1]=element.string
+			eventSchema['description']=element.string
 		elif element.name=="x-trumba:weblink":
-			eventSchema["weblink"][-1]=element.string
+			eventSchema["weblink"]=element.string
 		elif element.name=="x-trumba:categorycalendar":
-			eventSchema["category"][-1]=element.string.split("|")[1]
+			eventSchema["category"]=element.string.split("|")[1]
 		elif element.name=="x-trumba:customfield":
 			elementName=element.attrs["name"]
 			if elementName=="Event image":
-				eventSchema["eventImage"][-1]=element.string
+				eventSchema["eventImage"]=element.string
 			elif elementName=="Schedule":
-				eventSchema["schedule"][-1]=element.string
+				eventSchema["schedule"]=element.string
 			elif elementName=="Cost":
-				eventSchema["cost"][-1]=element.string
+				eventSchema["cost"]=element.string
 			elif elementName=="Venue":
-				eventSchema["venue"][-1]=element.string
+				eventSchema["venue"]=element.string
 			elif elementName=="Venue address":
-				eventSchema["venueAddress"][-1]=element.string
+				eventSchema["venueAddress"]=element.string
 			elif elementName=="Bookings":
-				eventSchema["bookings"][-1]=element.string
+				eventSchema["bookings"]=element.string
 			elif elementName=="Meeting point":
-				eventSchema["meetingPoint"][-1]=element.string
+				eventSchema["meetingPoint"]=element.string
 			elif elementName=="Requirements":
-				eventSchema["requirements"][-1]=element.string
+				eventSchema["requirements"]=element.string
 			elif elementName=="Age":
-				eventSchema["age"][-1]=element.string
+				eventSchema["age"]=element.string
 			elif elementName=="Show type":
-				eventSchema["showType"][-1]=element.string
-			elif elementName=="":
-				eventSchema[""][-1]=element.string
+				eventSchema["showType"]=element.string
 			elif elementName in ignore:
 				continue
 			else:
@@ -115,4 +114,4 @@ def eventAdd(eventSchema,eventSoup):
 	return eventSchema
 
 #x=readRSSFeeds()
-#print(x["schedule"])
+#print(x[50])
