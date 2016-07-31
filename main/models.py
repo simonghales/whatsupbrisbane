@@ -24,7 +24,6 @@ class EventInfo(models.Model):
 	showType = models.TextField(default=text_default)
 	schedule = models.TextField(default=text_default)
 	outdoors = models.NullBooleanField()
-	imageURL = models.TextField(default=text_default)
 
 class AddressLocation(models.Model):
 
