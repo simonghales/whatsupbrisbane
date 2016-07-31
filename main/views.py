@@ -58,7 +58,7 @@ def events(request):
         
         if(event.timeStart.isoformat() >= timeStart and
            event.timeStop.isoformat() <= timeStop and
-           haversine(event_location, current_location) < radius):
+           haversine.haversine(event_location, current_location) < radius):
 
             selectedEvents.append({"title": event.title,
                                    "description": event.description,
