@@ -37,7 +37,8 @@ def test(request):
 
 def events(request):
 
-    body = request.GET
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
 
     lat = body['lat']
     lng = body['lng']
@@ -56,8 +57,8 @@ def events(request):
     for event in allEvents:
         event_location = findOrCreateLatLong(event.venueAddress)
         
-        if(event.timeStart >= timeStart and
-           event.timeStop <= timeStop and
+        if(event.timeStart.isoformat() >= timeStart and
+           event.timeStop.isoformat() <= timeStop and
            haversine(event_location, current_location) < radius):
 
             selectedEvents.append({"title": event.title,
