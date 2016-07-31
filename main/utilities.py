@@ -28,7 +28,7 @@ def findOrCreateLatLong(addressInput):
             lat,lng = addressToLatLong(addressInput)
 
             address = AddressLocation()
-            address.address = event.venueAddress
+            address.address = addressInput
             address.lat = lat
             address.lng = lng
             address.save()
@@ -43,7 +43,7 @@ def createLatLong(addressInput):
             lat,lng = addressToLatLong(addressInput)
 
             address = AddressLocation()
-            address.address = event.venueAddress
+            address.address = addressInput
             address.lat = lat
             address.lng = lng
             address.save()
