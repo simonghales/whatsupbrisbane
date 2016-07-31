@@ -45,7 +45,7 @@ def events(request):
     
     radius = body['radius']
     timeStart = body['start']
-    timeEnd = body['end']
+    timeStop = body['end']
 
     # run function to retrieve from db and filter based on these
     # then return the results in a HttpResponse(json.dumps list
